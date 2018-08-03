@@ -7,16 +7,8 @@ ENV NODE_VERSION 10.8.0
 
 # Switch to root user
 USER root
-
 RUN apk add --no-cache \
         libstdc++ \
-    && apk add --no-cache --virtual .build-deps \
-        binutils-gold \
-        g++ \
-        gcc \
-        libgcc \
-        linux-headers \
-        make \
         python \
         build-base \ 
         libtool \
@@ -24,6 +16,13 @@ RUN apk add --no-cache \
         automake \
         jq \
         rsync \
+    && apk add --no-cache --virtual .build-deps \
+        binutils-gold \
+        g++ \
+        gcc \
+        libgcc \
+        linux-headers \
+        make \
     && cd /tmp \
     && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz" \
     && tar -xf "node-v$NODE_VERSION.tar.xz" \
